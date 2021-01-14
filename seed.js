@@ -1,12 +1,19 @@
+/* eslint-disable prefer-const */
 const faker = require('faker');
 const listings = require('./database');
 
 const getRandomBool = () => {
-  const num = Math.round(Math.random());
+  let num = Math.round(Math.random());
   if (num === 0) {
     return false;
   }
   return true;
+};
+
+const getRandomNH = () => {
+  let neighborhoods = ['Bayview', 'Hayes Valley', 'Sunset', 'Richmond', 'Civic Center', 'Ingleside', 'Russian Hill', 'Lower Haight', 'Castro', 'Duboce Triangle', 'Twin Peaks', 'Portrero Hill', 'Nob Hill', 'North Beach', 'SOMA'];
+  let randomNum = Math.floor(Math.random() * neighborhoods.length);
+  return neighborhoods[randomNum];
 };
 
 const generateEntries = () => {
@@ -16,7 +23,7 @@ const generateEntries = () => {
     // eslint-disable-next-line prefer-const
     let obj = {
       address: faker.address.streetAddress(),
-      neighbourhood: faker.random.word(),
+      neighbourhood: getRandomNH(),
       city: faker.address.city(),
       state: faker.address.state(),
       price: Math.floor(Math.random() * (10000000 - 500000 + 1) + 500000),
@@ -33,8 +40,14 @@ const generateEntries = () => {
 };
 
 const insertFakeEntries = () => {
-  const entries = generateEntries();
-  listings.bulkCreate(entries);
+  let entries = generateEntries();
+  listings.bulkCreate(entries)
+    .then(() => {
+      console.log('database seeded');
+    })
+    .catch((err) => {
+      console.log('Could not seed the database ', err);
+    });
 };
 
 insertFakeEntries();

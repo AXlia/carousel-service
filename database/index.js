@@ -79,5 +79,4 @@ sequelize.authenticate()
 
 module.export = {
   Home,
-  sequelize,
 };

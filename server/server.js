@@ -10,6 +10,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(bodyParser.json());
 
 app.get('/api/homes', controller.getListings);
+app.delete('/api/homes', controller.emptyDB);
 
 app.listen(port, (err) => {
   if (err) {

@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
 const faker = require('faker');
-const listings = require('./database');
+const Homes = require('./database/index.js');
 
 const getRandomBool = () => {
   let num = Math.round(Math.random());
@@ -23,7 +23,7 @@ const generateEntries = () => {
     // eslint-disable-next-line prefer-const
     let obj = {
       address: faker.address.streetAddress(),
-      neighbourhood: getRandomNH(),
+      neighborhood: getRandomNH(),
       city: faker.address.city(),
       state: faker.address.state(),
       price: Math.floor(Math.random() * (10000000 - 500000 + 1) + 500000),
@@ -41,13 +41,13 @@ const generateEntries = () => {
 
 const insertFakeEntries = () => {
   let entries = generateEntries();
-  listings.bulkCreate(entries)
-    .then(() => {
-      console.log('database seeded');
-    })
-    .catch((err) => {
-      console.log('Could not seed the database ', err);
-    });
+  Homes.insertMany(entries, (err) => {
+    if (err) {
+      console.log('Could not seed database');
+    } else {
+      console.log('Database seeded');
+    }
+  });
 };
 
 insertFakeEntries();

@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
 const faker = require('faker');
-const Homes = require('./database/index.js');
+const Homes = require('./index.js');
 
 const getRandomBool = () => {
   let num = Math.round(Math.random());
@@ -43,8 +43,10 @@ const insertFakeEntries = () => {
   let entries = generateEntries();
   Homes.insertMany(entries, (err) => {
     if (err) {
+      // eslint-disable-next-line no-console
       console.log('Could not seed database');
     } else {
+      // eslint-disable-next-line no-console
       console.log('Database seeded');
     }
   });

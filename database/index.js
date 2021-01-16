@@ -10,6 +10,7 @@ const HomesSchema = new Schema({
   neighborhood: String,
   city: String,
   state: String,
+  imageUrl: String,
   price: String,
   bedrooms: Number,
   bathrooms: Number,

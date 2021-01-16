@@ -21,4 +21,15 @@ module.exports = {
       }
     });
   },
+
+  getSimilar: (cb) => {
+    Homes.find({}, (err, result) => {
+      if (err) {
+        cb(err);
+      } else {
+        let homes = result.slice(0, 10);
+        cb(null, homes);
+      }
+    });
+  },
 };

@@ -16,6 +16,11 @@ const getRandomNH = () => {
   return neighborhoods[randomNum];
 };
 
+const getRandomImage = () => {
+  let num = Math.floor(Math.random() * 25);
+  return `https://hrsf132carouselimages.s3-us-west-1.amazonaws.com/${num}`;
+};
+
 const generateEntries = () => {
   // eslint-disable-next-line prefer-const
   let entries = [];
@@ -26,6 +31,7 @@ const generateEntries = () => {
       neighborhood: getRandomNH(),
       city: faker.address.city(),
       state: faker.address.state(),
+      imageUrl: getRandomImage(),
       price: Math.floor(Math.random() * (10000000 - 500000 + 1) + 500000),
       bedrooms: Math.floor(Math.random() * 10),
       bathrooms: Math.floor(Math.random() * 10),

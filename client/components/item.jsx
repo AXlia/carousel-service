@@ -8,7 +8,16 @@ import styled from 'styled-components'
 const StyledImg = styled.img`
   width: 224px;
   height: 160px;
+  border-radius: 8px;
 `;
+
+const PrimaryText = styled.p`
+  font-size: 16px;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 
 const Item = ({ home }) => (
   <div>
@@ -16,8 +25,8 @@ const Item = ({ home }) => (
     <span>{home.bedrooms}bd </span>
     <span>{home.bathrooms}ba </span>
     <span>{home.sqft} sqft</span>
-    <p>{home.address}</p>
-    <p>{home.neighborhood}, {home.city} {home.state}</p>
+    <PrimaryText>{home.address}</PrimaryText>
+    <PrimaryText>{home.neighborhood}, {home.city} {home.state}</PrimaryText>
     <hr></hr>
     <p>{home.realtor}</p>
   </div>

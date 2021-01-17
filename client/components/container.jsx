@@ -2,6 +2,13 @@
 import React from 'react';
 import Carousel from './carousel.jsx';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const StyleGlobal = styled.div`
+  font-family: Roboto, Arial, sans-serif;
+  letter-spacing: -0.1px;
+  color: rgb( 59, 65 , 68);
+`
 
 class Container extends React.Component {
   constructor() {
@@ -31,10 +38,10 @@ class Container extends React.Component {
 
   render() {
     return (
-      <div>
+      <StyleGlobal>
         <h1>The two carousels will go here</h1>
         <Carousel homes={this.state.homes} />
-      </div>
+      </StyleGlobal>
     );
   }
 }

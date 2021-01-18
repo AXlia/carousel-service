@@ -29,12 +29,12 @@ const Arrow = styled.div`
 
 const Carousel = (props) => (
   <div>
-    <Arrow><ArrowIosForwardOutline size="28"/></Arrow>
+    <Arrow><ArrowIosBackOutline size="28"/></Arrow>
     {props.homes.map((home) => <Item home={home} key={home._id}/>)}
     <div>
       <EndCard />
     </div>
-    <Arrow><ArrowIosBackOutline size="28"/></Arrow>
+    <Arrow><ArrowIosForwardOutline size="28"/></Arrow>
   </div>
 );
 

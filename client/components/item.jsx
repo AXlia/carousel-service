@@ -5,6 +5,18 @@ import {Bed} from '@styled-icons/fa-solid/Bed';
 import {ToiletPaper} from '@styled-icons/fa-solid/ToiletPaper';
 import {Sink} from '@styled-icons/fa-solid/Sink';
 import {SquareFoot} from '@styled-icons/material/SquareFoot';
+import {SuitHeart} from '@styled-icons/bootstrap/SuitHeart';
+import {SuitHeartFill} from '@styled-icons/bootstrap/SuitHeartFill';
+
+const Liked = styled(SuitHeartFill)`
+  color: rgb(255, 94, 63);
+  position: absolute;
+  z-index: 1;
+  display: inline-flex;
+  top: 0;
+  right: 0;
+  padding: 5px;
+`
 
 const Beds = styled(Bed)`
   color: rgb(134, 144, 153);
@@ -31,6 +43,8 @@ const ImgDiv = styled.div`
   height: 160px;
   border-radius: 8px;
   overflow: hidden;
+  display: flex;
+  position: relative;
 `
 
 const StyledImg = styled.img`
@@ -80,6 +94,7 @@ const Item = ({ home }) => (
   <StyledItem>
     <ImgDiv>
       <StyledImg src={home.imageUrl} />
+      <Liked size="30"/>
     </ImgDiv>
     <BoldText>{home.price}</BoldText>
     <PrimaryText> <Beds size="16"/> {home.bedrooms}bd <Bath size="16"/> {home.bathrooms}ba  <Sqft size="16"/>{home.sqft} sqft</PrimaryText>

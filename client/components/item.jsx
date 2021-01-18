@@ -26,11 +26,23 @@ const StyledItem = styled.div`
   margin: 0px 7px;
   cursor: pointer;
 `
-
-const StyledImg = styled.img`
+const ImgDiv = styled.div`
   width: 224px;
   height: 160px;
   border-radius: 8px;
+  overflow: hidden;
+`
+
+const StyledImg = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background-position: center;
+  background-size: cover;
+  &:hover {
+    box-shadow: 2px 3px  8px lightgrey;
+    transform: scale(1.2);
+  }
 `;
 
 const PrimaryText = styled.div`
@@ -66,7 +78,9 @@ const BoldText = styled.div`
 
 const Item = ({ home }) => (
   <StyledItem>
-    <StyledImg src={home.imageUrl} />
+    <ImgDiv>
+      <StyledImg src={home.imageUrl} />
+    </ImgDiv>
     <BoldText>{home.price}</BoldText>
     <PrimaryText> <Beds size="16"/> {home.bedrooms}bd <Bath size="16"/> {home.bathrooms}ba  <Sqft size="16"/>{home.sqft} sqft</PrimaryText>
     <PrimaryText>{home.address}</PrimaryText>

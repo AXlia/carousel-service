@@ -65,6 +65,10 @@ const SeeMore = styled.button`
   padding: 8px 16px;
   background-color: rgb(255, 255, 255);
   color: rgb(0, 120, 130);
+  &:hover {
+    background-color: rgb(0, 120, 130);
+    color: rgb(255, 255, 255);
+  }
 
 `
 

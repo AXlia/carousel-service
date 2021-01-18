@@ -18,7 +18,13 @@ const Arrow = styled.div`
   cursor: pointer;
   justify-content: center;
   align-items: center;
-  transition: box-shadow 0.1s ease 0s, color 0.1s ease 0s, border-color 0.2s ease 0s, background-color 0.2s ease 0s;
+  &:hover {
+    box-shadow: 2px 3px  8px lightgrey;
+  }
+  &:active {
+    background-color: rgb(134, 144, 153);
+    color: rgb(255, 255, 255);
+  }
 `
 
 const Carousel = (props) => (
@@ -33,3 +39,4 @@ const Carousel = (props) => (
 );
 
 export default Carousel;
+// transition: box-shadow 0.1s ease 0s, color 0.1s ease 0s, border-color 0.2s ease 0s, background-color 0.2s ease 0s;

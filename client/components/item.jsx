@@ -4,8 +4,19 @@ import styled from 'styled-components';
 import {Bed} from '@styled-icons/fa-solid/Bed';
 import {ToiletPaper} from '@styled-icons/fa-solid/ToiletPaper';
 import {Sink} from '@styled-icons/fa-solid/Sink';
-import {SquareFoot} from '@styled-icons/material-twotone/SquareFoot';
+import {SquareFoot} from '@styled-icons/material/SquareFoot';
 
+const Beds = styled(Bed)`
+  color: rgb(134, 144, 153);
+`
+
+const Bath = styled(ToiletPaper)`
+  color: rgb(134, 144, 153);
+`
+
+const Sqft = styled(SquareFoot)`
+  color: rgb(134, 144, 153);
+`
 
 const StyledItem = styled.div`
   display: inline-block;
@@ -57,7 +68,7 @@ const Item = ({ home }) => (
   <StyledItem>
     <StyledImg src={home.imageUrl} />
     <BoldText>{home.price}</BoldText>
-    <PrimaryText> <Bed size="16"/> {home.bedrooms}bd <ToiletPaper size="16"/> {home.bathrooms}ba {home.sqft} <SquareFoot size="20"/> sqft</PrimaryText>
+    <PrimaryText> <Beds size="16"/> {home.bedrooms}bd <Bath size="16"/> {home.bathrooms}ba  <Sqft size="16"/>{home.sqft} sqft</PrimaryText>
     <PrimaryText>{home.address}</PrimaryText>
     <PrimaryText>{home.neighborhood}, {home.city} {home.state}</PrimaryText>
     <SecondaryText>{home.realtor}</SecondaryText>

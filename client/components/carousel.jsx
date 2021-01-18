@@ -2,6 +2,7 @@
 import React from 'react';
 import Item from './item.jsx';
 import styled from 'styled-components';
+import EndCard from './endCard.jsx';
 import {ArrowIosForwardOutline} from '@styled-icons/evaicons-outline/ArrowIosForwardOutline';
 import {ArrowIosBackOutline} from '@styled-icons/evaicons-outline/ArrowIosBackOutline';
 
@@ -26,6 +27,7 @@ const Carousel = (props) => (
     {props.homes.map((home) => <Item home={home} key={home._id}/>)}
     <div>
       <p>This is the end of carousel see more div that will always be at the end</p>
+      <EndCard />
     </div>
     <Arrow><ArrowIosBackOutline size="28"/></Arrow>
   </div>

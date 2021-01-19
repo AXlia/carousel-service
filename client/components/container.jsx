@@ -21,9 +21,14 @@ class Container extends React.Component {
   constructor() {
     super();
     this.state = {
-      homes: []
+      homes: [],
+      carouselIndex: 0
     };
     this.getSimilarHomes = this.getSimilarHomes.bind(this);
+    this.moveSlides = this.moveSlides.bind(this);
+    this.moveForward = this.moveForward.bind(this);
+    this.moveBackward = this.moveBackward.bind(this);
+    this.toggleLike = this.toggleLike.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +46,52 @@ class Container extends React.Component {
       .catch( (err) => {
         console.log('getSimilarHomes ', err);
       });
+  }
+
+  toggleLike(id) {
+    axios.patch(`/api/homes?id=${id}`)
+      .then( () => {
+        this.getSimilarHomes();
+      })
+      .catch( (err) => {
+        console.log('could not like home ', err)
+      });
+  }
+
+  moveSlides(index) {
+    this.setState({
+      carouselIndex: index
+    })
+  }
+
+  moveForward() {
+    let index = this.state.carouselIndex;
+    let len = this.state.homes.length - 1;
+
+    if (index === len) {
+      index = -1;
+    }
+
+    ++index;
+
+    this.setState({
+      activeIndex: index
+    });
+  }
+
+  moveBackward() {
+    let index = this.state.carouselIndex;
+    let len = this.state.homes.length;
+
+    if (index < 1) {
+      index = len;
+    }
+
+    --index;
+
+    this.setState({
+      carouselIndex: index
+    });
   }
 
   render() {

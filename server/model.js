@@ -32,4 +32,29 @@ module.exports = {
       }
     });
   },
+
+  toggleLike: (id, cb) => {
+    Homes.findById(id, (err, homes) => {
+      if (err) {
+        cb(err);
+      } else
+      if (homes.liked) {
+        Homes.findByIdAndUpdate(id, { liked: false }, (err) => {
+          if (err) {
+            cb(err);
+          } else {
+            cb();
+          }
+        });
+      } else {
+        Homes.findByIdAndUpdate(id, { liked: true }, (err) => {
+          if (err) {
+            cb(err);
+          } else {
+            cb();
+          }
+        });
+      }
+    });
+  },
 };

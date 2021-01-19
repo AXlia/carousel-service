@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 
 app.get('/api/homes', controller.getListings);
 app.get('/api/similar', controller.getSimilar);
+app.patch('/api/homes', controller.toggleLike);
 app.delete('/api/homes', controller.emptyDB);
 
 app.listen(port, (err) => {

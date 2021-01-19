@@ -6,8 +6,20 @@ import EndCard from './endCard.jsx';
 import {ArrowIosForwardOutline} from '@styled-icons/evaicons-outline/ArrowIosForwardOutline';
 import {ArrowIosBackOutline} from '@styled-icons/evaicons-outline/ArrowIosBackOutline';
 
-const Arrow = styled.div`
+const Wrapper = styled.div`
+  position: relative;
+  width: 976px;
+  height: 300px;
+  overflow: hidden;
   display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-sizing: border-box;
+`
+
+const Arrow = styled.div`
+  display: inline-flex;
   padding: 1px;
   border: 1px solid rgb(232, 233, 234);
   background-color: rgb(255, 255, 255);
@@ -18,6 +30,9 @@ const Arrow = styled.div`
   cursor: pointer;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  z-index: 1;
+  transition: 0.3s;
   &:hover {
     box-shadow: 2px 3px  8px lightgrey;
   }
@@ -25,17 +40,31 @@ const Arrow = styled.div`
     background-color: rgb(134, 144, 153);
     color: rgb(255, 255, 255);
   }
+
 `
 
+const Forward = styled(Arrow)`
+  top: 130px;
+  left: 0;
+  margin-left: 5px;
+`;
+const Back = styled(Arrow)`
+  top: 130px;
+  right: 0;
+  margin-right: 5px;
+`;
+
+
+
 const Carousel = (props) => (
-  <div>
-    <Arrow><ArrowIosBackOutline size="28"/></Arrow>
+  <Wrapper>
+    <Forward><ArrowIosBackOutline size="28"/></Forward>
     {props.homes.map((home) => <Item home={home} key={home._id}/>)}
     <div>
       <EndCard />
     </div>
-    <Arrow><ArrowIosForwardOutline size="28"/></Arrow>
-  </div>
+    <Back><ArrowIosForwardOutline size="28"/></Back>
+  </Wrapper>
 );
 
 export default Carousel;

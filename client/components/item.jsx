@@ -8,9 +8,45 @@ import {SquareFoot} from '@styled-icons/material/SquareFoot';
 import {SuitHeart} from '@styled-icons/bootstrap/SuitHeart';
 import {SuitHeartFill} from '@styled-icons/bootstrap/SuitHeartFill';
 
+const NewTag = styled.span`
+  width: 28.453px;
+  height: 15px;
+  color: rgb(5, 34, 134);
+  background-color: rgb(255, 255, 255);
+  font-size: 12px;
+  line-height: 1.33;
+  padding: 2px 4px;
+  border-radius: 4px;
+  display: inline-flex;
+  font-weight: bold;
+  position: absolute;
+  z-index: 1;
+  margin: 8px;
+  top: 0;
+  left: 0;
+`
+
 const Liked = styled(SuitHeartFill)`
   color: rgb(255, 94, 63);
   position: absolute;
+  z-index: 1;
+  display: inline-flex;
+  top: 0;
+  right: 0;
+  padding: 5px;
+`
+const BorderHeart = styled(SuitHeart)`
+  color: #F8F8FF;
+  position: absolute;
+  z-index: 2;
+  display: inline-flex;
+  top: 0;
+  right: 0;
+  padding: 5px;
+
+`
+const BlackHeart = styled(SuitHeartFill)`
+  color: black;
   z-index: 1;
   display: inline-flex;
   top: 0;
@@ -37,6 +73,9 @@ const StyledItem = styled.div`
   box-sizing: border-box;
   margin: 0px 7px;
   cursor: pointer;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 16px 8px 0px;
 `
 const ImgDiv = styled.div`
   width: 224px;
@@ -53,6 +92,7 @@ const StyledImg = styled.img`
   border-radius: 8px;
   background-position: center;
   background-size: cover;
+  transition: 0.5s;
   &:hover {
     box-shadow: 2px 3px  8px lightgrey;
     transform: scale(1.2);
@@ -93,8 +133,9 @@ const BoldText = styled.div`
 const Item = ({ home }) => (
   <StyledItem>
     <ImgDiv>
+      {home.newTag?  <NewTag>NEW</NewTag> : ''}
       <StyledImg src={home.imageUrl} />
-      <Liked size="30"/>
+      {home.liked? <Liked size="25" /> : <BorderHeart size="25"/>}
     </ImgDiv>
     <BoldText>{home.price}</BoldText>
     <PrimaryText> <Beds size="16"/> {home.bedrooms}bd <Bath size="16"/> {home.bathrooms}ba  <Sqft size="16"/>{home.sqft} sqft</PrimaryText>
@@ -105,10 +146,3 @@ const Item = ({ home }) => (
 );
 
 export default Item;
-//the icons for bedrooms bathrooms and sqft are svg
-//they are held in multiple divs
-//big div- media block
-//inner div each span and svg
-
-
-//hr is actually a border top of the realtor div

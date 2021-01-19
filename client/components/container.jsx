@@ -8,11 +8,7 @@ const StyleGlobal = styled.div`
   font-family: 'Cabin', Roboto, Arial, sans-serif;
   letter-spacing: -0.1px;
   color: rgb( 59, 65 , 68);
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  box-sizing: border-box;
+  border: 5px solid yellow;
 `
 
 const BoldText = styled.div`

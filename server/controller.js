@@ -28,6 +28,7 @@ module.exports = {
       }
     });
   },
+
   toggleLike: (req, res) => {
     let id = req.query.id;
     model.toggleLike(id, (err) => {
@@ -35,6 +36,16 @@ module.exports = {
         res.status(500).send(err);
       } else {
         res.status(200).send();
+      }
+    });
+  },
+
+  getNew: (req, res) => {
+    model.getNew((err, results) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(results);
       }
     });
   },

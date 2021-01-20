@@ -57,4 +57,14 @@ module.exports = {
       }
     });
   },
+
+  getNew: (cb) => {
+    Homes.find({ newTag: true }, (err, results) =>{
+      if (err) {
+        cb(err);
+      } else {
+        cb(results);
+      }
+    });
+  },
 };

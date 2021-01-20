@@ -25,10 +25,8 @@ class Container extends React.Component {
       carouselIndex: 0
     };
     this.getSimilarHomes = this.getSimilarHomes.bind(this);
-    this.moveSlides = this.moveSlides.bind(this);
-    this.moveForward = this.moveForward.bind(this);
-    this.moveBackward = this.moveBackward.bind(this);
     this.toggleLike = this.toggleLike.bind(this);
+    this.changeIndex = this.changeIndex.bind(this);
   }
 
   componentDidMount() {
@@ -58,47 +56,20 @@ class Container extends React.Component {
       });
   }
 
-  moveSlides(index) {
-    this.setState({
-      carouselIndex: index
-    })
-  }
-
-  moveForward() {
-    let index = this.state.carouselIndex;
-    let len = this.state.homes.length - 1;
-
-    if (index === len) {
-      index = -1;
-    }
-
-    ++index;
-
-    this.setState({
-      activeIndex: index
-    });
-  }
-
-  moveBackward() {
-    let index = this.state.carouselIndex;
-    let len = this.state.homes.length;
-
-    if (index < 1) {
-      index = len;
-    }
-
-    --index;
-
+  changeIndex(num) {
+    let index = num + this.state.carouselIndex;
     this.setState({
       carouselIndex: index
     });
   }
+
 
   render() {
     return (
       <StyleGlobal>
+        <h1>{this.state.carouselIndex}</h1>
         <h1>Similar Homes You May Like</h1>
-        <Carousel homes={this.state.homes} />
+        <Carousel homes={this.state.homes} like={this.toggleLike} move={this.changeIndex} index={this.state.carouselIndex}/>
       </StyleGlobal>
     );
   }

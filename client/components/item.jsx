@@ -43,7 +43,6 @@ const BorderHeart = styled(SuitHeart)`
   top: 0;
   right: 0;
   padding: 5px;
-
 `
 const BlackHeart = styled(SuitHeartFill)`
   color: black;
@@ -69,13 +68,15 @@ const Sqft = styled(SquareFoot)`
 const StyledItem = styled.div`
   display: inline-block;
   width: 224px;
-  height: 294px;
   box-sizing: border-box;
   margin: 0px 7px;
   cursor: pointer;
   border-style: solid;
   border-color: transparent;
   border-width: 16px 8px 0px;
+  flex-shrink: 0;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
 `
 const ImgDiv = styled.div`
   width: 224px;
@@ -92,7 +93,7 @@ const StyledImg = styled.img`
   border-radius: 8px;
   background-position: center;
   background-size: cover;
-  transition: 0.5s;
+  transition: 0.5s ease;
   &:hover {
     box-shadow: 2px 3px  8px lightgrey;
     transform: scale(1.2);
@@ -130,12 +131,15 @@ const BoldText = styled.div`
 `
 
 
-const Item = ({ home }) => (
+const Item = ({ home, like }) => (
   <StyledItem>
     <ImgDiv>
       {home.newTag?  <NewTag>NEW</NewTag> : ''}
       <StyledImg src={home.imageUrl} />
-      {home.liked? <Liked size="25" /> : <BorderHeart size="25"/>}
+      {home.liked? <Liked size="25" onClick={() => {
+        like(home._id)
+      }}/> : <BorderHeart size="25" onClick={() => {
+        like(home._id)}}/>}
     </ImgDiv>
     <BoldText>{home.price}</BoldText>
     <PrimaryText> <Beds size="16"/> {home.bedrooms}bd <Bath size="16"/> {home.bathrooms}ba  <Sqft size="16"/>{home.sqft} sqft</PrimaryText>

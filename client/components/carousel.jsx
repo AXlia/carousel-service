@@ -6,16 +6,33 @@ import EndCard from './endCard.jsx';
 import {ArrowIosForwardOutline} from '@styled-icons/evaicons-outline/ArrowIosForwardOutline';
 import {ArrowIosBackOutline} from '@styled-icons/evaicons-outline/ArrowIosBackOutline';
 
+const Overlay = styled.div`
+  position: relative;
+  width: 976px;
+  height: 300px;
+  display: flex;
+  box-sizing: border-box;
+`
+
 const Wrapper = styled.div`
   position: relative;
   width: 976px;
   height: 300px;
-  overflow: hidden;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
   box-sizing: border-box;
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  };
+`
+
+const ContentWrapper = styled.div`
+  position: relative;
+  width: 15000px;
+  height: 300px;
+  display: flex;
+  box-sizing: border-box;
+  transform: translatex(${props => props.index * -360}px)
 `
 
 const Arrow = styled.div`
@@ -31,7 +48,8 @@ const Arrow = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
-  z-index: 1;
+  top: 135px;
+  z-index: 5;
   transition: 0.3s;
   &:hover {
     box-shadow: 2px 3px  8px lightgrey;
@@ -43,29 +61,31 @@ const Arrow = styled.div`
 
 `
 
-const Forward = styled(Arrow)`
-  top: 130px;
-  left: 0;
-  margin-left: 5px;
-`;
 const Back = styled(Arrow)`
-  top: 130px;
+  left: 0;
+  margin: 8px;
+`;
+const Forward = styled(Arrow)`
   right: 0;
-  margin-right: 5px;
+  margin: 8px;
 `;
 
 
 
 const Carousel = (props) => (
-  <Wrapper>
-    <Forward><ArrowIosBackOutline size="28"/></Forward>
-    {props.homes.map((home) => <Item home={home} key={home._id}/>)}
-    <div>
-      <EndCard />
-    </div>
-    <Back><ArrowIosForwardOutline size="28"/></Back>
-  </Wrapper>
+  <Overlay>
+     {props.index !== 0? <Back onClick={() => {props.move(-1)}}><ArrowIosBackOutline size="28"/></Back> : '' }
+    <Wrapper>
+
+      <ContentWrapper index={props.index}>
+        {props.homes.map((home) => <Item home={home} key={home._id} like={props.like} />)}
+        <EndCard />
+      </ContentWrapper>
+
+
+    </Wrapper>
+    {props.index === props.homes.length / 2? '' : <Forward onClick={() => {props.move(1)}}><ArrowIosForwardOutline size="28"/></Forward>}
+  </Overlay>
 );
 
 export default Carousel;
-// transition: box-shadow 0.1s ease 0s, color 0.1s ease 0s, border-color 0.2s ease 0s, background-color 0.2s ease 0s;

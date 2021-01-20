@@ -6,10 +6,15 @@ import {Sign} from '@styled-icons/fa-solid/Sign';
 const StyledItem = styled.div`
   display: inline-block;
   width: 224px;
-  height: 294px;
   box-sizing: border-box;
   margin: 0px 7px;
   cursor: pointer;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 16px 8px 0px;
+  flex-shrink: 0;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
 `;
 
 const TextDiv = styled.div`

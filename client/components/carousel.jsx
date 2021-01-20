@@ -72,20 +72,33 @@ const Forward = styled(Arrow)`
 
 
 
-const Carousel = (props) => (
-  <Overlay>
-     {props.index !== 0? <Back onClick={() => {props.move(-1)}}><ArrowIosBackOutline size="28"/></Back> : '' }
-    <Wrapper>
+const Carousel = (props) => {
+  let showLArrow = true;
+  let showRArrow = true;
+  if (props.index === 0) {
+    showLArrow = false;
+  }
+  if (props.index === props.homes.length / 2) {
+    showRArrow = false;
+  }
+  if (props.scroll) {
+    showLArrow = false
+    showRArrow = false
+  }
+  return (
+    <Overlay>
+      {showLArrow? <Back onClick={() => {props.move(-1, props.id)}}><ArrowIosBackOutline size="28"/></Back> : '' }
+      <Wrapper onScroll={ () => props.scrolling()} >
 
-      <ContentWrapper index={props.index}>
-        {props.homes.map((home) => <Item home={home} key={home._id} like={props.like} />)}
-        <EndCard />
-      </ContentWrapper>
+        <ContentWrapper index={props.index}>
+          {props.homes.map((home) => <Item home={home} key={home._id} like={props.like} />)}
+          <EndCard loc={props.loc}/>
+        </ContentWrapper>
 
-
-    </Wrapper>
-    {props.index === props.homes.length / 2? '' : <Forward onClick={() => {props.move(1)}}><ArrowIosForwardOutline size="28"/></Forward>}
-  </Overlay>
-);
+      </Wrapper>
+      {showRArrow? <Forward onClick={() => {props.move(1, props.id)}}><ArrowIosForwardOutline size="28"/></Forward>: ''}
+    </Overlay>
+  )
+};
 
 export default Carousel;

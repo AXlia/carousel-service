@@ -63,7 +63,8 @@ module.exports = {
       if (err) {
         cb(err);
       } else {
-        cb(results);
+        let homes = results.slice(15, 30);
+        cb(null, homes);
       }
     });
   },

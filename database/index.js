@@ -18,6 +18,7 @@ const HomesSchema = new Schema({
   realtor: String,
   newTag: Boolean,
   liked: Boolean,
+  trending: String,
 });
 
 const Homes = mongoose.model('Homes', HomesSchema);

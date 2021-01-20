@@ -7,6 +7,15 @@ import {Sink} from '@styled-icons/fa-solid/Sink';
 import {SquareFoot} from '@styled-icons/material/SquareFoot';
 import {SuitHeart} from '@styled-icons/bootstrap/SuitHeart';
 import {SuitHeartFill} from '@styled-icons/bootstrap/SuitHeartFill';
+import {ArrowDown} from '@styled-icons/fa-solid/ArrowDown';
+import {ArrowUp} from '@styled-icons/fa-solid/ArrowUp';
+
+const TrendUp = styled(ArrowUp)`
+  color: rgb(0, 178, 91);
+`;
+const TrendDown = styled(ArrowDown)`
+  color: rgb(217, 60, 35);
+`;
 
 const NewTag = styled.span`
   width: 28.453px;
@@ -128,6 +137,7 @@ const BoldText = styled.div`
   white-space: nowrap;
   overflow: hidden;
   test-overflow: ellipsis;
+  display: inline-block;
 `
 
 
@@ -141,7 +151,8 @@ const Item = ({ home, like }) => (
       }}/> : <BorderHeart size="25" onClick={() => {
         like(home._id)}}/>}
     </ImgDiv>
-    <BoldText>{home.price}</BoldText>
+    <BoldText>{home.price} {home.trending === 'down'? <TrendDown size="15"/> : home.trending === 'up'? <TrendUp size="15"/> : ''}</BoldText>
+
     <PrimaryText> <Beds size="16"/> {home.bedrooms}bd <Bath size="16"/> {home.bathrooms}ba  <Sqft size="16"/>{home.sqft} sqft</PrimaryText>
     <PrimaryText>{home.address}</PrimaryText>
     <PrimaryText>{home.neighborhood}, {home.city} {home.state}</PrimaryText>

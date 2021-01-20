@@ -17,8 +17,19 @@ const getRandomNH = () => {
 };
 
 const getRandomImage = () => {
-  let num = Math.floor(Math.random() * 25);
+  let num = Math.floor(Math.random() * 50);
   return `https://hrsf132carouselimages.s3-us-west-1.amazonaws.com/${num}`;
+};
+
+const generatePrice = () => {
+  let arr = faker.commerce.price().split('.');
+  return `$${arr[0]},000`;
+};
+
+const generateTrend = () => {
+  let trends = ['none', 'up', 'none', 'down', 'none', 'none', 'none'];
+  let num = Math.round(Math.random() * trends.length);
+  return trends[num];
 };
 
 const generateEntries = () => {
@@ -32,13 +43,14 @@ const generateEntries = () => {
       city: faker.address.city(),
       state: faker.address.state(),
       imageUrl: getRandomImage(),
-      price: Math.floor(Math.random() * (10000000 - 500000 + 1) + 500000),
+      price: generatePrice(),
       bedrooms: Math.floor(Math.random() * 10),
       bathrooms: Math.floor(Math.random() * 10),
       sqft: Math.floor(Math.random() * (10000 - 200 + 1) + 200),
       realtor: `${faker.name.findName()} ${faker.company.companyName()}`,
       newTag: getRandomBool(),
       liked: getRandomBool(),
+      trending: generateTrend(),
     };
     entries.push(obj);
   }

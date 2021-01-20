@@ -77,13 +77,13 @@ const SeeMore = styled.button`
 
 `
 
-const EndCard = () => {
+const EndCard = (props) => {
   return (
     <StyledItem>
       <TextDiv>
         <PostSign />
         <PrimaryText>See more homes for sale in</PrimaryText>
-        <BoldText>San Francisco</BoldText>
+        <BoldText>{props.loc}</BoldText>
         <SeeMore>Take a look</SeeMore>
       </TextDiv>
     </StyledItem>

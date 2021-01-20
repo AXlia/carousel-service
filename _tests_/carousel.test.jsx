@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 
@@ -8,6 +9,11 @@ describe('<Carousel />', () => {
     let homes = [{'test': 'test'}];
     const wrapper = mount(<Carousel homes={homes} />);
     expect(wrapper.props().homes).toEqual(homes);
+  });
+  it('should contain an item component', () => {
+    let homes = [{'test': 'test'}, {'test1': 'test1'}];
+    const wrapper = shallow(<Carousel homes={homes} />);
+    expect(wrapper.find('div')).to.have.lengthOf(homes.length);
   });
   it('should contain an item component', () => {
     let homes = [{'test': 'test'}, {'test1': 'test1'}];

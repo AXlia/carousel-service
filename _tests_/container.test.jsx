@@ -11,7 +11,7 @@ describe('<Container />', () => {
     expect(Container.prototype.componentDidMount.mock.calls.length).toBe(1);
   });
   it('should contain at least a Carousel Component', () => {
-    const wrapper = shallow(<Item home={home} />);
+    const wrapper = shallow(<Container />);
     expect(wrapper.containsMatchingElement(<Carousel />)).toEqual(true);
   })
 });

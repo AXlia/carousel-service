@@ -11,13 +11,9 @@ describe('<Carousel />', () => {
     expect(wrapper.props().homes).toEqual(homes);
   });
   it('should contain an item component', () => {
-    let homes = [{'test': 'test'}, {'test1': 'test1'}];
+    let homes = [{'test': 'test'}];
     const wrapper = shallow(<Carousel homes={homes} />);
-    expect(wrapper.find('div')).to.have.lengthOf(homes.length);
+    expect(wrapper.containsMatchingElement(<Item />)).toEqual(true);
   });
-  it('should contain an item component', () => {
-    let homes = [{'test': 'test'}, {'test1': 'test1'}];
-    const wrapper = shallow(<Carousel homes={homes} />);
-    expect(wrapper.find('div')).to.have.lengthOf(homes.length);
-  });
+
 });

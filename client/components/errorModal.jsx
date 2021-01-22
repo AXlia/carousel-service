@@ -63,8 +63,9 @@ const StyledBtn = styled.button`
   padding: 8px 16px;
   color: rgb(0, 120, 130);
   background-color: rgb(255, 255, 255);
-  border: 5px single rgb(0, 120, 130);
+  border: 1px solid rgb(232, 233, 234);
   border-radius: 8px;
+  transition: 0.5s ease;
   &:hover {
     background-color: rgb(0, 120, 130);
     color: rgb(255, 255, 255);
@@ -81,6 +82,7 @@ const BoldText = styled.p`
 
 const ErrorModal = ({ toggle }) => (
   <Background>
+    <Background onClick={() => { toggle(); }}></Background>
     <Wrapper>
 
       <StyledImage src="https://hrsf132carouselimages.s3-us-west-1.amazonaws.com/AXlia.png" />

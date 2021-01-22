@@ -12,6 +12,7 @@ const Overlay = styled.div`
   height: 18.75rem;
   display: flex;
   box-sizing: border-box;
+  min-width: 32rem;
 `;
 
 const Wrapper = styled.div`
@@ -28,11 +29,12 @@ const Wrapper = styled.div`
 
 const ContentWrapper = styled.div`
   position: relative;
-
   height: 100%;
   display: flex;
   box-sizing: border-box;
-  transform: translatex(${(props) => props.index}px)
+  transform: translatex(${(props) => props.index}px);
+  transition: transform 0.2s ease-out;
+
 `;
 
 const Arrow = styled.div`
@@ -77,12 +79,12 @@ const Carousel = ({index, scroll, homes, modal, move, scrolling, like, loc, id})
     showLArrow = false;
   }
   if (homes.length % 2 === 0) {
-    if (index < (Math.floor(homes.length / 2)) * -250) {
+    if (index < (Math.floor(homes.length / 2) + 1) * -250) {
       showRArrow = false;
     }
   }
   if (homes.length % 2 === 1) {
-    if (index < (Math.floor(homes.length / 2) + 4) * -250) {
+    if (index < ((homes.length - 4) * -250)) {
       showRArrow = false;
     }
   }

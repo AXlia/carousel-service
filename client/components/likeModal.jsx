@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
+import LikeItems from './likeItems.jsx';
 
 const Background = styled.div`
   position: fixed;
@@ -31,15 +32,15 @@ const StyledBtn = styled.button`
   top: 0px;
   right: 0px;
   margin: 24px;
-  border: 0;
+  border: 1px solid rgb(232, 233, 234);
   font-size: 20px;
   font-weight: bold;
   line-height: 1.5;
   padding: 8px 16px;
   color: rgb(0, 120, 130);
   background-color: rgb(255, 255, 255);
-  border: 5px single rgb(0, 120, 130);
   border-radius: 8px;
+  transition: 0.5s ease;
   &:hover {
     background-color: rgb(0, 120, 130);
     color: rgb(255, 255, 255);
@@ -47,53 +48,20 @@ const StyledBtn = styled.button`
   position: absolute;
   z-index: 500;
 `;
-const BoldText = styled.p`
-  color: rgb(0, 173, 187);
-  font-weight: bold;
-  font-size: 18px;
-`;
 
-const List = styled.div`
- border-radius: 8px;
- margin: 8px;
- border: 2px solid rgb(224, 247, 248);
- display: flex;
- &:hover {
-  box-shadow: 2px 2px 10px rgb(0, 120, 130);
 
-}
-`;
-const ListImg = styled.div`
- border-radius 8px;
- background-color: rgb(224, 247, 248);
- width: 50px;
- height: 50px;
- margin: 8px;
- display: inline-block;
-`;
-const Text = styled.p`
-  margin: 8px 0px;
-  padding: 20px;
-`;
 
-const LikedModal = ({ toggle }) => (
+
+const LikedModal = ({ toggle, lists }) => (
   <Background>
+    <Background onClick={() => { toggle(); }}></Background>
     <Wrapper>
-
       <StyledBtn onClick={() => { toggle(); }}>Close</StyledBtn>
       <h2>Add Like</h2>
-      <List>
-        <ListImg />
-        <Text>Create A New List</Text>
-      </List>
-      <List>
-        <ListImg />
-        <Text>Dream House</Text>
-      </List>
-      <List>
-        <ListImg />
-        <Text>Investment Properties</Text>
-      </List>
+      <LikeItems list={{title:"Create A New List", color: "rgb(206, 182, 255)" }} toggle={toggle}/>
+      {lists.map( (list) => {
+        return <LikeItems list={list} toggle={toggle}/>
+      })}
     </Wrapper>
   </Background>
 );

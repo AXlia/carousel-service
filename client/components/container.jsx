@@ -24,6 +24,7 @@ class Container extends React.Component {
       scroll: false,
       showError: false,
       showLike: false,
+      likeLists: [{title: "Axolotl's first homes", color:"rgb(242, 196, 48)"}, {title: "Investment Properties", color: "rgb(5, 34, 134)"}, {title: "Dream Houses", color: "rgb(250, 140, 104)"}]
     };
     this.getSimilarHomes = this.getSimilarHomes.bind(this);
     this.getNewHomes = this.getNewHomes.bind(this);
@@ -127,13 +128,13 @@ class Container extends React.Component {
 
   render() {
     const {
-      similar, similarIndex, newHomes, newIndex, location, scroll, showError, showLike,
+      similar, similarIndex, newHomes, newIndex, location, scroll, showError, showLike, likeLists
     } = this.state;
     return (
       <StyleGlobal>
 
         {showError ? <ErrorModal toggle={this.toggleModal} /> : ''}
-        {showLike ? <LikeModal toggle={this.toggleLikeModal} /> : ''}
+        {showLike ? <LikeModal toggle={this.toggleLikeModal} lists={likeLists}/> : ''}
         <h1>Similar Homes You May Like</h1>
         <Carousel homes={similar} like={this.toggleLike} move={this.changeIndex} index={similarIndex} loc={location} scrolling={this.handleScrolling} scroll={scroll} id="similar" modal={this.toggleModal} />
 

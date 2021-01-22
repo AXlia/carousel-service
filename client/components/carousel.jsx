@@ -1,39 +1,39 @@
 /* eslint-disable */
 import React from 'react';
-import Item from './item.jsx';
 import styled from 'styled-components';
+import { ArrowIosForwardOutline } from '@styled-icons/evaicons-outline/ArrowIosForwardOutline';
+import { ArrowIosBackOutline } from '@styled-icons/evaicons-outline/ArrowIosBackOutline';
 import EndCard from './endCard.jsx';
-import {ArrowIosForwardOutline} from '@styled-icons/evaicons-outline/ArrowIosForwardOutline';
-import {ArrowIosBackOutline} from '@styled-icons/evaicons-outline/ArrowIosBackOutline';
+import Item from './item.jsx';
 
 const Overlay = styled.div`
   position: relative;
-  width: 976px;
-  height: 300px;
+  width: 70%;
+  height: 18.75rem;
   display: flex;
   box-sizing: border-box;
-`
+`;
 
 const Wrapper = styled.div`
   position: relative;
-  width: 976px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
   display: flex;
   box-sizing: border-box;
   overflow-x: auto;
   &::-webkit-scrollbar {
     display: none;
   };
-`
+`;
 
 const ContentWrapper = styled.div`
   position: relative;
-  width: 15000px;
-  height: 300px;
+
+  height: 100%;
   display: flex;
   box-sizing: border-box;
-  transform: translatex(${props => props.index * -360}px)
-`
+  transform: translatex(${(props) => props.index}px)
+`;
 
 const Arrow = styled.div`
   display: inline-flex;
@@ -59,7 +59,7 @@ const Arrow = styled.div`
     color: rgb(255, 255, 255);
   }
 
-`
+`;
 
 const Back = styled(Arrow)`
   left: 0;
@@ -70,35 +70,40 @@ const Forward = styled(Arrow)`
   margin: 8px;
 `;
 
-
-
-const Carousel = (props) => {
+const Carousel = ({index, scroll, homes, modal, move, scrolling, like, loc, id}) => {
   let showLArrow = true;
   let showRArrow = true;
-  if (props.index === 0) {
+  if (index === 0) {
     showLArrow = false;
   }
-  if (props.index === props.homes.length / 2) {
-    showRArrow = false;
+  if (homes.length % 2 === 0) {
+    if (index < (Math.floor(homes.length / 2)) * -250) {
+      showRArrow = false;
+    }
   }
-  if (props.scroll) {
-    showLArrow = false
-    showRArrow = false
+  if (homes.length % 2 === 1) {
+    if (index < (Math.floor(homes.length / 2) + 4) * -250) {
+      showRArrow = false;
+    }
+  }
+  if (scroll) {
+    showLArrow = false;
+    showRArrow = false;
   }
   return (
     <Overlay>
-      {showLArrow? <Back onClick={() => {props.move(-1, props.id)}}><ArrowIosBackOutline size="28"/></Back> : '' }
-      <Wrapper onScroll={ () => props.scrolling()} >
+      {showLArrow ? <Back onClick={() => { move(250, id); }}><ArrowIosBackOutline size="28" /></Back> : '' }
+      <Wrapper onScroll={() => scrolling()}>
 
-        <ContentWrapper index={props.index}>
-          {props.homes.map((home) => <Item home={home} key={home._id} like={props.like} />)}
-          <EndCard loc={props.loc}/>
+        <ContentWrapper index={index}>
+          {homes.map((home) => <Item home={home} key={home._id} like={like} />)}
+          <EndCard loc={loc} modal={modal} />
         </ContentWrapper>
 
       </Wrapper>
-      {showRArrow? <Forward onClick={() => {props.move(1, props.id)}}><ArrowIosForwardOutline size="28"/></Forward>: ''}
+      {showRArrow ? <Forward onClick={() => { move(-250, id); }}><ArrowIosForwardOutline size="28" /></Forward> : ''}
     </Overlay>
-  )
+  );
 };
 
 export default Carousel;

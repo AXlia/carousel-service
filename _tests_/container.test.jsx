@@ -3,6 +3,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 
 import Container from '../client/components/container.jsx';
+import Carousel from '../client/components/carousel.jsx';
 
 describe('<Container />', () => {
   it('should call componentDidMount', () => {

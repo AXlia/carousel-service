@@ -1,14 +1,16 @@
 /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
-import {Bed} from '@styled-icons/fa-solid/Bed';
-import {ToiletPaper} from '@styled-icons/fa-solid/ToiletPaper';
-import {Sink} from '@styled-icons/fa-solid/Sink';
-import {SquareFoot} from '@styled-icons/material/SquareFoot';
-import {SuitHeart} from '@styled-icons/bootstrap/SuitHeart';
-import {SuitHeartFill} from '@styled-icons/bootstrap/SuitHeartFill';
-import {ArrowDown} from '@styled-icons/fa-solid/ArrowDown';
-import {ArrowUp} from '@styled-icons/fa-solid/ArrowUp';
+
+import { Bed } from '@styled-icons/fa-solid/Bed';
+import { Sink } from '@styled-icons/fa-solid/Sink';
+import { SquareFoot } from '@styled-icons/material/SquareFoot';
+
+import { Heart } from '@styled-icons/evaicons-solid/Heart';
+import { HeartOutline } from '@styled-icons/evaicons-outline/HeartOutline';
+
+import { ArrowDown } from '@styled-icons/fa-solid/ArrowDown';
+import { ArrowUp } from '@styled-icons/fa-solid/ArrowUp';
 
 const TrendUp = styled(ArrowUp)`
   color: rgb(0, 178, 91);
@@ -33,9 +35,9 @@ const NewTag = styled.span`
   margin: 8px;
   top: 0;
   left: 0;
-`
+`;
 
-const Liked = styled(SuitHeartFill)`
+const Liked = styled(Heart)`
   color: rgb(255, 94, 63);
   position: absolute;
   z-index: 1;
@@ -43,36 +45,49 @@ const Liked = styled(SuitHeartFill)`
   top: 0;
   right: 0;
   padding: 5px;
-`
-const BorderHeart = styled(SuitHeart)`
+`;
+
+const BorderHeart = styled(HeartOutline)`
   color: #F8F8FF;
+  position: absolute;
+  z-index: 3;
+  display: inline-flex;
+  top: 0;
+  right: 0;
+  padding: 5px;
+`;
+
+const BlackHeart = styled(Heart)`
+  color: black;
   position: absolute;
   z-index: 2;
   display: inline-flex;
   top: 0;
   right: 0;
   padding: 5px;
-`
-const BlackHeart = styled(SuitHeartFill)`
-  color: black;
+  opacity: 0.4;
+`;
+
+const EmptyHeart = styled.span`
+  position: absolute;
   z-index: 1;
   display: inline-flex;
   top: 0;
   right: 0;
   padding: 5px;
-`
+`;
 
 const Beds = styled(Bed)`
   color: rgb(134, 144, 153);
-`
+`;
 
-const Bath = styled(ToiletPaper)`
+const Bath = styled(Sink)`
   color: rgb(134, 144, 153);
-`
+`;
 
 const Sqft = styled(SquareFoot)`
   color: rgb(134, 144, 153);
-`
+`;
 
 const StyledItem = styled.div`
   display: inline-block;
@@ -86,7 +101,7 @@ const StyledItem = styled.div`
   flex-shrink: 0;
   -webkit-overflow-scrolling: touch;
   height: 100%;
-`
+`;
 const ImgDiv = styled.div`
   width: 224px;
   height: 160px;
@@ -94,7 +109,7 @@ const ImgDiv = styled.div`
   overflow: hidden;
   display: flex;
   position: relative;
-`
+`;
 
 const StyledImg = styled.img`
   width: 100%;
@@ -129,7 +144,7 @@ const SecondaryText = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space:nowrap;
-`
+`;
 
 const BoldText = styled.div`
   font-weight: bold;
@@ -138,24 +153,62 @@ const BoldText = styled.div`
   overflow: hidden;
   test-overflow: ellipsis;
   display: inline-block;
-`
-
+`;
 
 const Item = ({ home, like }) => (
   <StyledItem>
     <ImgDiv>
-      {home.newTag?  <NewTag>NEW</NewTag> : ''}
+      {home.newTag ? <NewTag>NEW</NewTag> : ''}
       <StyledImg src={home.imageUrl} />
-      {home.liked? <Liked size="25" onClick={() => {
-        like(home._id)
-      }}/> : <BorderHeart size="25" onClick={() => {
-        like(home._id)}}/>}
+      {home.liked ? (
+        <Liked
+          size="30"
+          onClick={() => {
+            like(home._id, true);
+          }}
+        />
+      ) : (
+        <EmptyHeart onClick={() => {
+          like(home._id, false);
+        }}
+        >
+          <BorderHeart size="30" />
+          <BlackHeart size="30" />
+        </EmptyHeart>
+      )}
     </ImgDiv>
-    <BoldText>{home.price} {home.trending === 'down'? <TrendDown size="15"/> : home.trending === 'up'? <TrendUp size="15"/> : ''}</BoldText>
+    <BoldText>
+      {home.price}
+      {' '}
+      {home.trending === 'down' ? <TrendDown size="15" /> : home.trending === 'up' ? <TrendUp size="15" /> : ''}
+    </BoldText>
 
-    <PrimaryText> <Beds size="16"/> {home.bedrooms}bd <Bath size="16"/> {home.bathrooms}ba  <Sqft size="16"/>{home.sqft} sqft</PrimaryText>
+    <PrimaryText>
+      {' '}
+      <Beds size="16" />
+      {' '}
+      {home.bedrooms}
+      bd
+      {' '}
+      <Bath size="13" />
+      {' '}
+      {home.bathrooms}
+      ba
+      {' '}
+      <Sqft size="16" />
+      {home.sqft}
+      {' '}
+      sqft
+    </PrimaryText>
     <PrimaryText>{home.address}</PrimaryText>
-    <PrimaryText>{home.neighborhood}, {home.city} {home.state}</PrimaryText>
+    <PrimaryText>
+      {home.neighborhood}
+      ,
+      {' '}
+      {home.city}
+      {' '}
+      {home.state}
+    </PrimaryText>
     <SecondaryText>{home.realtor}</SecondaryText>
   </StyledItem>
 );

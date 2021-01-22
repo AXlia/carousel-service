@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
-import {Sign} from '@styled-icons/fa-solid/Sign';
+import { Sign } from '@styled-icons/fa-solid/Sign';
 
 const StyledItem = styled.div`
   display: inline-block;
@@ -32,7 +32,7 @@ const PostSign = styled(Sign)`
   color: rgb(134, 144, 153);
   display: inline-block;
   line-height: 0;
-`
+`;
 
 const PrimaryText = styled.div`
   font-size: 16px;
@@ -52,7 +52,7 @@ const BoldText = styled.div`
   white-space: nowrap;
   overflow: hidden;
   test-overflow: ellipsis;
-`
+`;
 
 const SeeMore = styled.button`
   margin-top: 8px;
@@ -75,19 +75,17 @@ const SeeMore = styled.button`
     color: rgb(255, 255, 255);
   }
 
-`
+`;
 
-const EndCard = (props) => {
-  return (
-    <StyledItem>
-      <TextDiv>
-        <PostSign />
-        <PrimaryText>See more homes for sale in</PrimaryText>
-        <BoldText>{props.loc}</BoldText>
-        <SeeMore>Take a look</SeeMore>
-      </TextDiv>
-    </StyledItem>
-  )
-}
+const EndCard = ({ loc, modal }) => (
+  <StyledItem>
+    <TextDiv>
+      <PostSign />
+      <PrimaryText>See more homes for sale in</PrimaryText>
+      <BoldText>{loc}</BoldText>
+      <SeeMore onClick={() => { modal(); }}>Take a look</SeeMore>
+    </TextDiv>
+  </StyledItem>
+);
 
 export default EndCard;

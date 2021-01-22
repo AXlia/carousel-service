@@ -3,6 +3,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 
 import Carousel from '../client/components/carousel.jsx';
+import Item from '../client/components/item.jsx';
 
 describe('<Carousel />', () => {
   it('should accept a homes prop', () => {
@@ -12,7 +13,7 @@ describe('<Carousel />', () => {
   });
   it('should contain an item component', () => {
     let homes = [{'test': 'test'}];
-    const wrapper = shallow(<Carousel homes={homes} />);
+    const wrapper = mount(<Carousel homes={homes} />);
     expect(wrapper.containsMatchingElement(<Item />)).toEqual(true);
   });
 

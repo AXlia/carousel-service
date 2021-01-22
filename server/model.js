@@ -1,3 +1,4 @@
+/* eslint-disable */
 const Homes = require('../database/index.js');
 
 module.exports = {
@@ -14,7 +15,6 @@ module.exports = {
   emptyDB: (cb) => {
     Homes.deleteMany({}, (err) => {
       if (err) {
-        console.log('could not delete many');
         cb(err);
       } else {
         cb();
@@ -59,11 +59,11 @@ module.exports = {
   },
 
   getNew: (cb) => {
-    Homes.find({ newTag: true }, (err, results) =>{
+    Homes.find({ newTag: true }, (err, results) => {
       if (err) {
         cb(err);
       } else {
-        let homes = results.slice(15, 30);
+        let homes = results.slice(15, 34);
         cb(null, homes);
       }
     });

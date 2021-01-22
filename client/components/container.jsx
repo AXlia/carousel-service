@@ -1,20 +1,16 @@
 /* eslint-disable */
 import React from 'react';
-import Carousel from './carousel.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
+import Carousel from './carousel.jsx';
+import ErrorModal from './errorModal.jsx';
+import LikeModal from './likeModal.jsx';
 
 const StyleGlobal = styled.div`
   font-family: 'Cabin', Roboto, Arial, sans-serif;
   letter-spacing: -0.1px;
   color: rgb( 59, 65 , 68);
-`
-
-const BoldText = styled.div`
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 1.2;
-`
+`;
 
 class Container extends React.Component {
   constructor() {
@@ -23,9 +19,11 @@ class Container extends React.Component {
       similar: [],
       similarIndex: 0,
       newHomes: [],
-      newIndex:0,
+      newIndex: 0,
       location: 'San Francisco',
-      scroll: false
+      scroll: false,
+      showError: false,
+      showLike: false,
     };
     this.getSimilarHomes = this.getSimilarHomes.bind(this);
     this.getNewHomes = this.getNewHomes.bind(this);
@@ -33,7 +31,8 @@ class Container extends React.Component {
     this.changeIndex = this.changeIndex.bind(this);
     this._timeout = null;
     this.handleScrolling = this.handleScrolling.bind(this);
-
+    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleLikeModal = this.toggleLikeModal.bind(this);
   }
 
   componentDidMount() {
@@ -41,85 +40,106 @@ class Container extends React.Component {
     this.getNewHomes();
   }
 
+  handleScrolling() {
+    if (this._timeout) {
+      clearTimeout(this._timeout);
+    }
+    this._timeout = setTimeout(() => {
+      this._timeout = null;
+      this.setState({
+        scroll: false,
+      });
+    }, 1000);
+    if (!this.state.scrollStatus) {
+      this.setState({
+        scroll: true,
+      });
+    }
+  }
+
   getSimilarHomes() {
     axios.get('/api/similar')
-      .then( (results) => {
-        let values = results.data;
+      .then((results) => {
+        const values = results.data;
         this.setState({
-          similar: values
+          similar: values,
         });
       })
-      .catch( (err) => {
+      .catch((err) => {
         console.log('getSimilarHomes ', err);
       });
   }
 
   getNewHomes() {
     axios.get('/api/new')
-      .then( (results) => {
-        let values = results.data;
+      .then((results) => {
+        const values = results.data;
         this.setState({
-          newHomes: values
+          newHomes: values,
         });
       })
-      .catch( (err) => {
+      .catch((err) => {
         console.log('getSimilarHomes ', err);
       });
   }
 
-  toggleLike(id) {
+  toggleLike(id, bool) {
     axios.patch(`/api/homes?id=${id}`)
-      .then( () => {
+      .then(() => {
         this.getSimilarHomes();
         this.getNewHomes();
+        if (!bool) {
+          this.toggleLikeModal();
+        }
       })
-      .catch( (err) => {
-        console.log('could not like home ', err)
+      .catch((err) => {
+        console.log('could not like home ', err);
       });
   }
 
   changeIndex(num, carousel) {
     console.log(this.state.similarIndex);
-    if (carousel === "similar") {
-      let index = this.state.similarIndex + num;
+    if (carousel === 'similar') {
+      const index = this.state.similarIndex + num;
 
       this.setState({
-        similarIndex: index
+        similarIndex: index,
       });
     } else {
-      let index = this.state.newIndex + num;
+      const index = this.state.newIndex + num;
       this.setState({
-        newIndex: index
+        newIndex: index,
       });
     }
   }
 
-  handleScrolling() {
-    if(this._timeout){ //if there is already a timeout in process cancel it
-      clearTimeout(this._timeout);
-     }
-     this._timeout = setTimeout(() => {
-       this._timeout = null;
-       this.setState({
-         scroll: false
-       });
-     },1000);
-     if(!this.state.scrollStatus) {
-       this.setState({
-         scroll: true
-       });
-     }
+  toggleModal() {
+    this.setState({
+      showError: !this.state.showError,
+    });
+  }
+
+  toggleLikeModal() {
+    this.setState({
+      showLike: !this.state.showLike,
+    });
   }
 
   render() {
-    let {similar, similarIndex, newHomes, newIndex, location,scroll} = this.state;
+    const {
+      similar, similarIndex, newHomes, newIndex, location, scroll, showError, showLike,
+    } = this.state;
     return (
       <StyleGlobal>
-        <h1>{this.state.carouselIndex}</h1>
+
+        {showError ? <ErrorModal toggle={this.toggleModal} /> : ''}
+        {showLike ? <LikeModal toggle={this.toggleLikeModal} /> : ''}
         <h1>Similar Homes You May Like</h1>
-        <Carousel homes={similar} like={this.toggleLike} move={this.changeIndex} index={similarIndex} loc={location} scrolling={this.handleScrolling} scroll={scroll} id="similar"/>
+        <Carousel homes={similar} like={this.toggleLike} move={this.changeIndex} index={similarIndex} loc={location} scrolling={this.handleScrolling} scroll={scroll} id="similar" modal={this.toggleModal} />
+
         <h1>New Listings Nearby</h1>
-        <Carousel homes={newHomes} like={this.toggleLike} move={this.changeIndex} index={newIndex} loc={location}  scrolling={this.handleScrolling} scroll={scroll} id="newHomes"/>
+        <Carousel homes={newHomes} like={this.toggleLike} move={this.changeIndex} index={newIndex} loc={location} scrolling={this.handleScrolling} scroll={scroll} modal={this.toggleModal} id="newHomes" />
+
       </StyleGlobal>
     );
   }

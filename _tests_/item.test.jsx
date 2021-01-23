@@ -1,8 +1,14 @@
 /* eslint-disable */
 import React from 'react';
 import { mount, shallow } from 'enzyme';
+import styled from 'styled-components';
 
 import Item from '../client/components/item.jsx';
+import { ArrowDown } from '@styled-icons/fa-solid/ArrowDown';
+
+const TrendDown = styled(ArrowDown)`
+  color: rgb(217, 60, 35);
+`;
 
 describe('<Item />', () => {
   it('should accept a home prop', () => {

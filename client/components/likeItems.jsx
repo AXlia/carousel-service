@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+/* eslint-disable */
+
 const List = styled.div`
   border-radius: 8px;
   margin: 8px 0px;
@@ -32,7 +34,7 @@ const Text = styled.p`
 
 const LikeItems = ({ list, toggle }) => (
   <List color={list.color} onClick={() => { toggle(); }}>
-    <ListImg src="https://hrsf132carouselimages.s3-us-west-1.amazonaws.com/HappyAx.jpg"/>
+    <ListImg src="https://hrsf132carouselimages.s3-us-west-1.amazonaws.com/HappyAx.jpg" />
     <Text>{list.title}</Text>
   </List>
 );

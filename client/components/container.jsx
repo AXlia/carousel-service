@@ -41,7 +41,9 @@ class Container extends React.Component {
     this.getNewHomes();
   }
 
-  handleScrolling() {
+  handleScrolling(e) {
+    let element = e.target
+    console.log(element.scrollX);
     if (this._timeout) {
       clearTimeout(this._timeout);
     }

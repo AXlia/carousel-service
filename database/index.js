@@ -10,6 +10,7 @@ const HomesSchema = new Schema({
   neighborhood: String,
   city: String,
   state: String,
+  imageUrl: String,
   price: String,
   bedrooms: Number,
   bathrooms: Number,
@@ -17,6 +18,7 @@ const HomesSchema = new Schema({
   realtor: String,
   newTag: Boolean,
   liked: Boolean,
+  trending: String,
 });
 
 const Homes = mongoose.model('Homes', HomesSchema);

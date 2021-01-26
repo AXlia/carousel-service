@@ -5,6 +5,14 @@ import styled from 'styled-components';
 import Carousel from './carousel.jsx';
 import ErrorModal from './errorModal.jsx';
 import LikeModal from './likeModal.jsx';
+import { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+  html, body {
+    height:100%;
+    overflow:auto;
+  }
+`;
 
 const StyleGlobal = styled.div`
   font-family: 'Cabin', Roboto, Arial, sans-serif;
@@ -41,9 +49,7 @@ class Container extends React.Component {
     this.getNewHomes();
   }
 
-  handleScrolling(e) {
-    let element = e.target
-    console.log(element.scrollX);
+  handleScrolling() {
     if (this._timeout) {
       clearTimeout(this._timeout);
     }
@@ -61,7 +67,8 @@ class Container extends React.Component {
   }
 
   getSimilarHomes() {
-    axios.get('/api/similar')
+    //api/similar?id=num between 5
+    axios.get('/carousel/similar')
       .then((results) => {
         const values = results.data;
         this.setState({
@@ -74,7 +81,7 @@ class Container extends React.Component {
   }
 
   getNewHomes() {
-    axios.get('/api/new')
+    axios.get('/carousel/new')
       .then((results) => {
         const values = results.data;
         this.setState({
@@ -87,7 +94,7 @@ class Container extends React.Component {
   }
 
   toggleLike(id, bool) {
-    axios.patch(`/api/homes?id=${id}`)
+    axios.patch(`/carousel/homes?id=${id}`)
       .then(() => {
         this.getSimilarHomes();
         this.getNewHomes();
@@ -134,7 +141,7 @@ class Container extends React.Component {
     } = this.state;
     return (
       <StyleGlobal>
-
+        <GlobalStyle/>
         {showError ? <ErrorModal toggle={this.toggleModal} /> : ''}
         {showLike ? <LikeModal toggle={this.toggleLikeModal} lists={likeLists}/> : ''}
         <h1>Similar Homes You May Like</h1>

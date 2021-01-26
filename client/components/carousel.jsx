@@ -22,19 +22,20 @@ const Wrapper = styled.div`
   display: flex;
   box-sizing: border-box;
   overflow-x: auto;
+  overflow-x: auto;
   &::-webkit-scrollbar {
     display: none;
   };
-`;
 
+`;
+// transform: translatex(${(props) => props.index}px);
 const ContentWrapper = styled.div`
   position: relative;
   height: 100%;
   display: flex;
   box-sizing: border-box;
-  transform: translatex(${(props) => props.index}px);
-  transition: transform 0.2s ease-out;
-
+  left: ${(props) => props.index}px;
+  transition: left 0.2s ease;
 `;
 
 const Arrow = styled.div`
@@ -97,7 +98,7 @@ const Carousel = ({index, scroll, homes, modal, move, scrolling, like, loc, id})
       {showLArrow ? <Back onClick={() => { move(250, id); }}><ArrowIosBackOutline size="28" /></Back> : '' }
       <Wrapper onScroll={() => scrolling()}>
 
-        <ContentWrapper index={index}>
+        <ContentWrapper key="uniq" index={index}>
           {homes.map((home) => <Item home={home} key={home._id} like={like} />)}
           <EndCard loc={loc} modal={modal} />
         </ContentWrapper>

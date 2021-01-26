@@ -51,6 +51,7 @@ const generateEntries = () => {
       newTag: getRandomBool(),
       liked: getRandomBool(),
       trending: generateTrend(),
+      homeId: Math.floor(Math.random() * 5),
     };
     entries.push(obj);
   }

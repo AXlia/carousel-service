@@ -17,7 +17,8 @@ const GlobalStyle = createGlobalStyle`
 const StyleGlobal = styled.div`
   font-family: 'Cabin', Roboto, Arial, sans-serif;
   letter-spacing: -0.1px;
-  color: rgb( 59, 65 , 68);
+  color: rgb( 59, 65 , 68),
+  width: 100%;
 `;
 
 class Container extends React.Component {
@@ -68,7 +69,7 @@ class Container extends React.Component {
 
   getSimilarHomes() {
     //api/similar?id=num between 5
-    axios.get('/carousel/similar')
+    axios.get('/api/similar')
       .then((results) => {
         const values = results.data;
         this.setState({
@@ -81,7 +82,7 @@ class Container extends React.Component {
   }
 
   getNewHomes() {
-    axios.get('/carousel/new')
+    axios.get('/api/new')
       .then((results) => {
         const values = results.data;
         this.setState({
@@ -94,7 +95,7 @@ class Container extends React.Component {
   }
 
   toggleLike(id, bool) {
-    axios.patch(`/carousel/homes?id=${id}`)
+    axios.patch(`/api/homes?id=${id}`)
       .then(() => {
         this.getSimilarHomes();
         this.getNewHomes();

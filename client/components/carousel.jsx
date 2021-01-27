@@ -8,7 +8,7 @@ import Item from './item.jsx';
 
 const Overlay = styled.div`
   position: relative;
-  width: 70%;
+  width: 100%;
   height: 18.75rem;
   display: flex;
   box-sizing: border-box;

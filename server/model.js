@@ -23,10 +23,12 @@ module.exports = {
   },
 
   getSimilar: (cb) => {
+    //find anything that as the homeId === to given id in arg
     Homes.find({}, (err, result) => {
       if (err) {
         cb(err);
       } else {
+        //get random number amount between 6/ 15
         let homes = result.slice(0, 10);
         cb(null, homes);
       }

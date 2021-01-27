@@ -69,7 +69,7 @@ class Container extends React.Component {
 
   getSimilarHomes() {
     //api/similar?id=num between 5
-    axios.get('/carousel/similar')
+    axios.get('/api/similar')
       .then((results) => {
         const values = results.data;
         this.setState({
@@ -82,7 +82,7 @@ class Container extends React.Component {
   }
 
   getNewHomes() {
-    axios.get('/carousel/new')
+    axios.get('/api/new')
       .then((results) => {
         const values = results.data;
         this.setState({
@@ -95,7 +95,7 @@ class Container extends React.Component {
   }
 
   toggleLike(id, bool) {
-    axios.patch(`/carousel/homes?id=${id}`)
+    axios.patch(`/api/homes?id=${id}`)
       .then(() => {
         this.getSimilarHomes();
         this.getNewHomes();

@@ -9,16 +9,16 @@ const port = 3001;
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(bodyParser.json());
 
-app.get('/carousel', (req, res) => {
-  res.status(200).send();
-});
+// app.get('/carousel', (req, res) => {
+//   res.status(200).send();
+// });
 
-app.get('/homes', controller.getListings);
+app.get('/api/homes', controller.getListings);
+app.patch('/api/homes', controller.toggleLike);
+app.delete('/api/homes', controller.emptyDB);
+app.get('/api/similar', controller.getSimilar);
+app.get('/api/new', controller.getNew);
 
-app.get('/similar', controller.getSimilar);
-app.get('/new', controller.getNew);
-app.patch('/homes', controller.toggleLike);
-app.delete('/homes', controller.emptyDB);
 
 app.listen(port, (err) => {
   if (err) {

@@ -7,12 +7,7 @@ import ErrorModal from './errorModal.jsx';
 import LikeModal from './likeModal.jsx';
 import { createGlobalStyle } from 'styled-components'
 
-const GlobalStyle = createGlobalStyle`
-  html, body {
-    height:100%;
-    overflow:auto;
-  }
-`;
+
 
 const StyleGlobal = styled.div`
   font-family: 'Cabin', Roboto, Arial, sans-serif;
@@ -142,7 +137,6 @@ class Container extends React.Component {
     } = this.state;
     return (
       <StyleGlobal>
-        <GlobalStyle/>
         {showError ? <ErrorModal toggle={this.toggleModal} /> : ''}
         {showLike ? <LikeModal toggle={this.toggleLikeModal} lists={likeLists}/> : ''}
         <h1>Similar Homes You May Like</h1>

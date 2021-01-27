@@ -11,7 +11,7 @@ const Background = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0 , 0.5);
   transform: scale(1.1);
-  z-index: 60;
+  z-index: 20;
 `;
 
 const Wrapper = styled.div`
@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   transform: translate(-50%, -50%);
   padding: 1rem 1.5rem;
   width: 24rem;
-  z-index: 120;
+  z-index: 21;
   border: 5px solid rgb(232, 233, 234);
   border-radius: 8px;
   background-color: white;
@@ -46,7 +46,7 @@ const StyledBtn = styled.button`
     color: rgb(255, 255, 255);
   }
   position: absolute;
-  z-index: 500;
+  z-index: 23;
 `;
 
 

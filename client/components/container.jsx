@@ -17,7 +17,8 @@ const GlobalStyle = createGlobalStyle`
 const StyleGlobal = styled.div`
   font-family: 'Cabin', Roboto, Arial, sans-serif;
   letter-spacing: -0.1px;
-  color: rgb( 59, 65 , 68);
+  color: rgb( 59, 65 , 68),
+  width: 100%;
 `;
 
 class Container extends React.Component {

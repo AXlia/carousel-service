@@ -6,7 +6,7 @@ const controller = require('./controller.js');
 const app = express();
 const port = 3001;
 
-app.use('/:id', express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

@@ -66,7 +66,7 @@ class Container extends React.Component {
 
   getSimilarHomes() {
     let id = window.location.pathname;
-    axios.get(`/api/similar/${id[1]}`)
+    axios.get(`/api/similar${id}`)
       .then((results) => {
         const values = results.data;
         this.setState({

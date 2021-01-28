@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components';
 import Carousel from './carousel.jsx';
 import ErrorModal from './errorModal.jsx';
@@ -41,6 +42,7 @@ class Container extends React.Component {
   }
 
   componentDidMount() {
+    console.log(window.location);
     this.getSimilarHomes();
     this.getNewHomes();
   }
@@ -63,8 +65,8 @@ class Container extends React.Component {
   }
 
   getSimilarHomes() {
-    //api/similar?id=num between 5
-    axios.get('/api/similar')
+    let id = window.location.pathname;
+    axios.get(`/api/similar/${id[1]}`)
       .then((results) => {
         const values = results.data;
         this.setState({

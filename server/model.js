@@ -22,9 +22,9 @@ module.exports = {
     });
   },
 
-  getSimilar: (cb) => {
+  getSimilar: (id, cb) => {
     //find anything that as the homeId === to given id in arg
-    Homes.find({}, (err, result) => {
+    Homes.find({homeId: id}, (err, result) => {
       if (err) {
         cb(err);
       } else {

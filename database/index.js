@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/listings', { useNewUrlParser: true });
+const DB_URL = process.env.CONNECTIONSTRING || 'mongodb://localhost/listings';
+mongoose.connect(DB_URL, {useNewUrlParser: true});
 
 // tags could be array
 // address could be another schema

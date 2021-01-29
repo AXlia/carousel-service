@@ -22,7 +22,8 @@ module.exports = {
   getSimilar: (req, res) => {
     // req.params to get home id
     // pass model the id
-    model.getSimilar((err, results) => {
+    let id = req.params.id;
+    model.getSimilar(id, (err, results) => {
       if (err) {
         res.status(500).send(err);
       } else {

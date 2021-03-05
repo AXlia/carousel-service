@@ -1,4 +1,3 @@
-/* eslint-disable prefer-const */
 const faker = require('faker');
 const Homes = require('./index.js');
 
@@ -33,10 +32,8 @@ const generateTrend = () => {
 };
 
 const generateEntries = () => {
-  // eslint-disable-next-line prefer-const
   let entries = [];
   for (let i = 0; i < 101; i += 1) {
-    // eslint-disable-next-line prefer-const
     let obj = {
       address: faker.address.streetAddress(),
       neighborhood: getRandomNH(),

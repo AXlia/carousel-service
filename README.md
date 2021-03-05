@@ -1,6 +1,6 @@
 # Similar Homes Carousel
 
-> 
+>
 
 ## Related Projects
 
@@ -21,19 +21,36 @@
 
 ## Requirements
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
 - Node 6.13.0
-- etc
+- React 16
+- Webpack ^5.13.0
 
 ## Development
 
-### Installing Dependencies
+### Installing Dependencies and Starting Service
 
-From within the root directory:
-
+Install dependencies:
 ```sh
-npm install -g webpack
 npm install
 ```
 
+Starting Service:
+```sh
+npm run build
+npm start
+```
+When working with Docker use:
+```sh
+npm run start-container
+```
+### Running Jest + Enzyme tests
+
+```sh
+npm run test
+```
+
+### For Seeding DB with fake data
+
+```sh
+npm run seed
+```

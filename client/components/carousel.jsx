@@ -28,7 +28,7 @@ const Wrapper = styled.div`
   };
 
 `;
-// transform: translatex(${(props) => props.index}px);
+
 const ContentWrapper = styled.div`
   position: relative;
   height: 100%;

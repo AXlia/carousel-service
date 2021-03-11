@@ -2,10 +2,8 @@ const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 
 const DB_URL = process.env.CONNECTIONSTRING || 'mongodb://localhost/listings';
-mongoose.connect(DB_URL, {useNewUrlParser: true});
+mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// tags could be array
-// address could be another schema
 const HomesSchema = new Schema({
   address: String,
   neighborhood: String,

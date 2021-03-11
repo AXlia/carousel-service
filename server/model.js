@@ -1,4 +1,3 @@
-/* eslint-disable */
 const Homes = require('../database/index.js');
 
 module.exports = {
@@ -23,12 +22,10 @@ module.exports = {
   },
 
   getSimilar: (id, cb) => {
-    //find anything that as the homeId === to given id in arg
-    Homes.find({homeId: id}, (err, result) => {
+    Homes.find({ homeId: id }, (err, result) => {
       if (err) {
         cb(err);
       } else {
-        //get random number amount between 6/ 15
         let homes = result.slice(0, 10);
         cb(null, homes);
       }
@@ -41,17 +38,17 @@ module.exports = {
         cb(err);
       } else
       if (homes.liked) {
-        Homes.findByIdAndUpdate(id, { liked: false }, (err) => {
-          if (err) {
-            cb(err);
+        Homes.findByIdAndUpdate(id, { liked: false }, (error) => {
+          if (error) {
+            cb(error);
           } else {
             cb();
           }
         });
       } else {
-        Homes.findByIdAndUpdate(id, { liked: true }, (err) => {
-          if (err) {
-            cb(err);
+        Homes.findByIdAndUpdate(id, { liked: true }, (error) => {
+          if (error) {
+            cb(error);
           } else {
             cb();
           }

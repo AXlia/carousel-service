@@ -20,9 +20,7 @@ module.exports = {
     });
   },
   getSimilar: (req, res) => {
-    // req.params to get home id
-    // pass model the id
-    let id = req.params.id;
+    let { id } = req.params;
     model.getSimilar(id, (err, results) => {
       if (err) {
         res.status(500).send(err);
@@ -33,7 +31,7 @@ module.exports = {
   },
 
   toggleLike: (req, res) => {
-    let id = req.query.id;
+    let { id } = req.query;
     model.toggleLike(id, (err) => {
       if (err) {
         res.status(500).send(err);

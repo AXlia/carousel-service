@@ -29,7 +29,8 @@ class Container extends React.Component {
       scroll: false,
       showError: false,
       showLike: false,
-      likeLists: [{title: "Axolotl's first homes", color:"rgb(242, 196, 48)"}, {title: "Investment Properties", color: "rgb(5, 34, 134)"}, {title: "Dream Houses", color: "rgb(250, 140, 104)"}]
+      likeLists: [{title: "Axolotl's first homes", color:"rgb(242, 196, 48)"}, {title: "Investment Properties", color: "rgb(5, 34, 134)"}, {title: "Dream Houses", color: "rgb(250, 140, 104)"}],
+      timeout: null
     };
     this.getSimilarHomes = this.getSimilarHomes.bind(this);
     this.getNewHomes = this.getNewHomes.bind(this);
@@ -48,16 +49,19 @@ class Container extends React.Component {
   }
 
   handleScrolling() {
-    if (this._timeout) {
-      clearTimeout(this._timeout);
-    }
-    this._timeout = setTimeout(() => {
-      this._timeout = null;
+    let { timeout, scrollStatus } = this.state;
+    if (timeout) {
       this.setState({
+        timeout: clearTimeout(timeout)
+      });
+    }
+    timeout = setTimeout(() => {
+      this.setState({
+        timeout: null,
         scroll: false,
       });
     }, 1000);
-    if (!this.state.scrollStatus) {
+    if (!scrollStatus) {
       this.setState({
         scroll: true,
       });

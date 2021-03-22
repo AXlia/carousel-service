@@ -36,7 +36,6 @@ class Container extends React.Component {
     this.getNewHomes = this.getNewHomes.bind(this);
     this.toggleLike = this.toggleLike.bind(this);
     this.changeIndex = this.changeIndex.bind(this);
-    this._timeout = null;
     this.handleScrolling = this.handleScrolling.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.toggleLikeModal = this.toggleLikeModal.bind(this);

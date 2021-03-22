@@ -1,14 +1,9 @@
-/* eslint-disable */
 import React from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom'
 import styled from 'styled-components';
 import Carousel from './carousel.jsx';
 import ErrorModal from './errorModal.jsx';
 import LikeModal from './likeModal.jsx';
-import { createGlobalStyle } from 'styled-components'
-
-
 
 const StyleGlobal = styled.div`
   font-family: 'Cabin', Roboto, Arial, sans-serif;
@@ -29,8 +24,8 @@ class Container extends React.Component {
       scroll: false,
       showError: false,
       showLike: false,
-      likeLists: [{title: "Axolotl's first homes", color:"rgb(242, 196, 48)"}, {title: "Investment Properties", color: "rgb(5, 34, 134)"}, {title: "Dream Houses", color: "rgb(250, 140, 104)"}],
-      timeout: null
+      likeLists: [{ title: 'Axolotl\'s first homes', color: 'rgb(242, 196, 48)' }, { title: 'Investment Properties', color: 'rgb(5, 34, 134)' }, { title: 'Dream Houses', color: 'rgb(250, 140, 104)' }],
+      timeout: null,
     };
     this.getSimilarHomes = this.getSimilarHomes.bind(this);
     this.getNewHomes = this.getNewHomes.bind(this);
@@ -42,7 +37,6 @@ class Container extends React.Component {
   }
 
   componentDidMount() {
-    console.log(window.location);
     this.getSimilarHomes();
     this.getNewHomes();
   }
@@ -51,7 +45,7 @@ class Container extends React.Component {
     let { timeout, scrollStatus } = this.state;
     if (timeout) {
       this.setState({
-        timeout: clearTimeout(timeout)
+        timeout: clearTimeout(timeout),
       });
     }
     timeout = setTimeout(() => {
@@ -109,15 +103,15 @@ class Container extends React.Component {
   }
 
   changeIndex(num, carousel) {
-    console.log(this.state.similarIndex);
+    const { similarIndex, newIndex } = this.state;
     if (carousel === 'similar') {
-      const index = this.state.similarIndex + num;
+      const index = similarIndex + num;
 
       this.setState({
         similarIndex: index,
       });
     } else {
-      const index = this.state.newIndex + num;
+      const index = newIndex + num;
       this.setState({
         newIndex: index,
       });
@@ -125,20 +119,22 @@ class Container extends React.Component {
   }
 
   toggleModal() {
+    const { showError } = this.state;
     this.setState({
-      showError: !this.state.showError,
+      showError: !showError,
     });
   }
 
   toggleLikeModal() {
+    const { showLike } = this.state;
     this.setState({
-      showLike: !this.state.showLike,
+      showLike: !showLike,
     });
   }
 
   render() {
     const {
-      similar, similarIndex, newHomes, newIndex, location, scroll, showError, showLike, likeLists
+      similar, similarIndex, newHomes, newIndex, location, scroll, showError, showLike, likeLists,
     } = this.state;
     return (
       <StyleGlobal>
